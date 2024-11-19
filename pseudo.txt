@@ -1,0 +1,7 @@
+for( s7 =0; i < columnof1*rowsof2; s7++){
+	for(s10 = 0; s10 < rowsof1*4; s10+=4){
+				
+		a0=dotprocut((a0)(startof1+s7)*, (a1)(startof2+s10)*, (a2)rowsof1, (a3)strideof1=1, (a4)strideof2=columnsof2)
+
+	}
+}
