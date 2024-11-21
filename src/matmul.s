@@ -26,8 +26,13 @@
 matmul:
 
     # Error checks
-
-
+    addi t0, x0, 38
+    bge  x0, a1, error
+    bge  x0, a2, error
+    bge  x0, a4, error
+    bge  x0, a5, error
+    bne  a2, a4, error
+    
     # Prologue
     addi sp, sp, -52
     sw  s0, 0(sp)
@@ -76,7 +81,6 @@ inner_loop_end:
     addi s7, s7, 1
     j outer_loop_start
 outer_loop_end:
-    
     lw  s0, 0(sp)
     lw  s1, 4(sp)
     lw  s2, 8(sp)
@@ -95,3 +99,7 @@ outer_loop_end:
 
 
     jr ra
+
+error:
+    add a0, t0, x0
+    j exit
