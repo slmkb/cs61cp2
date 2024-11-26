@@ -65,7 +65,7 @@ outer_loop_start:
     mul s6, a0, s7  #   s6  (int)   width of m1 * row number
     add s10, x0, x0 #   s10 (int)   is the counter of the inner loop
 inner_loop_start:
-    beq s10, s1, inner_loop_end
+    beq s10, s5, inner_loop_end
     add a0, s6, s0  #   a0 (int*)   is the start of m0 + offest (conter of outer_loop*number of columns of m0)
     add a1, s11, x0 #   a1 (int*)   is the start of m1 + offest (column number of m1)
     add a2, s2, x0  #   a2 (int)    is the number of columns of m1

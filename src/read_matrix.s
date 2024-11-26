@@ -25,18 +25,83 @@
 #     this function terminates the program with error code 29
 # ==============================================================================
 read_matrix:
-
+    
     # Prologue
-
-
-
-
-
-
-
-
-
+    addi sp, sp, -32
+    sw  ra, 0(sp)
+    sw  s0, 4(sp)
+    sw  s1, 8(sp)
+    sw  s2, 12(sp)
+    sw  s3, 16(sp)
+    sw  s4, 20(sp)
+    sw  s5, 24(sp)
+    sw  s6, 28(sp)
+    
+    add s0, a0, x0
+    add s1, a1, x0
+    add s2, a2, x0
+    add a1, x0, x0
+    call fopen
+    add s4, a0, x0
+    addi t0, x0, -1
+    addi a0, x0, 27
+    beq s4, t0, error
+    add a0, s4, x0
+    add a1, s1, x0
+    addi a2, x0, 4
+    call fread
+    add t0, a0, x0
+    addi a0, x0, 29
+    addi t1, x0, 4
+    bne t0, t1, error
+    add a0, s4, x0
+    add a1, s2, x0
+    addi a2, x0, 4
+    call fread
+    add t0, a0, x0
+    addi a0, x0, 29
+    addi t1, x0, 4
+    bne t0, t1, error
+    lw a1, 0(s1)
+    lw a2, 0(s2)
+    mul s6, a1, a2
+    addi t0, x0, 4
+    mul s6, s6, t0
+    mul a0, s6, t0
+    call malloc
+    add s5, a0, x0
+    addi a0, x0, 26
+    beq s5, x0, error
+    add a0, s4, x0
+    add a1, s5, x0
+    add a2, s6, x0
+    call fread
+    
+    add t0, a0, x0
+    bne s6, t0, error
+    
+    add a0, s4, x0
+    call fclose
+    add t0, a0, x0
+    addi a0, x0, 28
+    bne t0, x0, error
+    
+    add a0, s5, x0
+    
+    
+    lw  ra, 0(sp)
+    lw  s0, 4(sp)
+    lw  s1, 8(sp)
+    lw  s2, 12(sp)
+    lw  s3, 16(sp)
+    lw  s4, 20(sp)
+    lw  s5, 24(sp)
+    lw  s6, 28(sp)
+    addi sp, sp, 32
     # Epilogue
 
 
     jr ra
+
+error:
+    j exit
