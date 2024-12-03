@@ -37,8 +37,8 @@ loop_start:
     bge t6, a2, loop_end
     lw t1, 0(a0)
     lw t2, 0(a1)
-    mul t1, t1, t2              
-    add t0, t0, t1              #sum += mul
+    mul a5, t1, t2              
+    add t0, t0, a5              #sum += mul
     add a0, a0, t3
     add a1, a1, t4
     addi t6, t6, 1
